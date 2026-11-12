@@ -8,13 +8,11 @@ import java.util.*;
 @RestController
 @RequestMapping("/api")
 public class StudentController {
-    private static final Logger logger =
-        LoggerFactory.getLogger(StudentController.class);
+    private static final Logger logger = LoggerFactory.getLogger(StudentController.class);
 
     private List<Student> students = new ArrayList<>(List.of(
-        new Student(1L, "Ahmed", "SE4111", 95.0),
-        new Student(2L, "Sara", "SE4111", 88.5)
-    ));
+            new Student(1L, "Ahmed", "SE4111", 95.0),
+            new Student(2L, "Sara", "SE4111", 88.5)));
 
     @GetMapping("/students")
     public List<Student> getAll() {
@@ -24,9 +22,9 @@ public class StudentController {
     @GetMapping("/students/{id}")
     public Student getById(@PathVariable Long id) {
         return students.stream()
-            .filter(s -> s.getId().equals(id))
-            .findFirst()
-            .orElse(null);
+                .filter(s -> s.getId().equals(id))
+                .findFirst()
+                .orElse(null);
     }
 
     @PostMapping("/students")
@@ -36,4 +34,11 @@ public class StudentController {
         logger.info("Added student: id={}, name={}", s.getId(), s.getName());
         return s;
     }
+
+    @GetMapping("/health")
+    public Map<String, String> health() {
+        logger.info("Health check called");
+        return Map.of("status", "UP");
+    }
+
 }
