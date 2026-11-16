@@ -20,7 +20,7 @@ public class StudentControllerTest {
     void shouldReturnAllStudents() throws Exception {
         mockMvc.perform(get("/api/students"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.length()").value(2));
+                .andExpect(jsonPath("$.length()").value(3));
     }
 
     @Test
